@@ -23,16 +23,17 @@ export class ImdbServiceService {
 
     // This is some seriously bad code.
     // If you do this on a job interview, you did not learn this in my class.
-    if ((theUrl.includes('127.0.0.1')) || (theUrl.includes('localhost')))
-    {
-      result = 'http://127.0.0.1:5000/imdb/artists/';
-    } else {
+    if (theUrl.includes('amazonaws')) {
+      /* This can change over time */
       result = 'ec2-54-242-71-165.compute-1.amazonaws.com:5000/imdb/artists/';
+    }
+    else {
+      result = 'http://127.0.0.1:5011/imdb/artists/';
     }
     return result;
   }
 
-  
+
   /** GET heroes from the server */
   getArtists(artistName): Observable<ImdbArtist[]> {
     let theUrl: string;
